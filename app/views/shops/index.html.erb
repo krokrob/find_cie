@@ -1,6 +1,32 @@
 <h1>Recherchez une enseigne:</h1>
-<%= form_tag shops_path do %>
+<%= form_tag shops_path, method: :get do %>
+  <label for="address">Adresse</label>
   <%= text_field_tag :address %>
+  <label for="nature">Nature</label>
   <%= text_field_tag :nature %>
   <%= button_tag 'Chercher', type: 'submit' %>
 <% end %>
+
+<% if @places %>
+  <ul>
+    <% @places.each do |place| %>
+      <li>
+        <%= place['name'] %>, <%= place['formatted_address'] %>
+        <%= form_tag shops_path, method: :get do %>
+          <div style="display:none;">
+            <%= text_field_tag :place_id, place['place_id'] %>
+          </div>
+          <%= button_tag 'Contact', type: 'submit' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to 'Nouvelle recherche', shops_path %>
+<% end %>
+
+<% if @place %>
+  <%= @place['name'] %> <%= @place['formatted_phone_number'] %>
+  <%= link_to 'Nouvelle recherche', shops_path %>
+<% end %>
+
+
