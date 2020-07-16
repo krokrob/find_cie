@@ -1,0 +1,6 @@
+<h1>Recherchez une enseigne:</h1>
+<%= form_tag shops_path do %>
+  <%= text_field_tag :address %>
+  <%= text_field_tag :nature %>
+  <%= button_tag 'Chercher', type: 'submit' %>
+<% end %>
